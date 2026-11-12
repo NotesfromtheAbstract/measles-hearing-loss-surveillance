@@ -1,0 +1,24 @@
+BEGIN_HPSA_CAPTURE_TABLE
+Outbreak county HPSA summary (v2 recalibrated)
+county     state cases hpsa_score capture_prob expected_hl_raw expected_hl_captured
+GAINES     TX      393         20        0.010           3.340                0.033
+TERRY      TX       89         17        0.015           0.757                0.012
+YOAKUM     TX       72         16        0.018           0.612                0.011
+LYNN       TX       48         18        0.013           0.408                0.005
+LEA        NM       42         14        0.024           0.357                0.008
+GARZA      TX       35         17        0.015           0.298                0.005
+DAWSON     TX       27         15        0.020           0.230                0.005
+LUBBOCK    TX       24          5        0.087           0.204                0.018
+HOCKLEY    TX       18         16        0.018           0.153                0.003
+COCHRAN    TX       14         19        0.011           0.119                0.001
+OKLAHOMA   OK       14          8        0.056           0.119                0.007
+CROSBY     TX       10         16        0.018           0.085                0.002
+TULSA      OK       10          6        0.075           0.085                0.006
+CHAVES     NM        9         13        0.027           0.077                0.002
+FLOYD      TX        8         17        0.015           0.068                0.001
+EDDY       NM        8         12        0.032           0.068                0.002
+CANADIAN   OK        7         10        0.042           0.060                0.003
+ROOSEVELT  NM        6         16        0.018           0.051                0.001
+COMANCHE   OK        6         12        0.032           0.051                0.002
+MOTLEY     TX        5         20        0.010           0.043                0.000
+END_HPSA_CAPTURE_TABLE
