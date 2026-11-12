@@ -40,6 +40,10 @@ The R script also downloads the HRSA Bureau of Health Workforce primary-care HPS
 
 On that download, designated HPSA scores for these counties differ from the scores in the capture table. Gaines County is a designated High Needs Geographic HPSA with score 13 in the file; the capture table uses score 20. Motley County is a designated Geographic HPSA with score 9; the capture table uses score 20. Terry County has a designated low-income population HPSA with score 18 and no designated geographic HPSA; the capture table uses score 17. The port keeps the scores from `track3_hpsa_capture.R` so the rounded table matches that script.
 
+## Data note
+
+The current HRSA bulk file lists Gaines County at HPSA score 13 and Motley County at 9, while track3_hpsa_capture.R uses 20 for both. The port reproduces the script as written.
+
 ## How to run
 
 ### R
@@ -60,7 +64,9 @@ The second script reads `data/outbreak_counties.csv` and writes `r_reference/r_o
 3. The home directory comes from `%let datadir = %sysget(HOME);`. To use a different folder, replace that line with the folder that contains the CSV and leave off the trailing slash. Example: `%let datadir = /home/your-user-id/sas-stata-port/data;`
 4. In the log, compare the block between `BEGIN_HPSA_CAPTURE_TABLE` and `END_HPSA_CAPTURE_TABLE` with `r_reference/r_output.txt`.
 
-The program uses a DATA step, PROC SQL, and PROC SORT. The three-decimal step follows R's halfway rule (keep the even thousandth). Gaines County raw hearing-loss cases are the halfway value 3.3405, which this table prints as 3.340.
+The program uses a DATA step, PROC SQL, and PROC SORT. Block comments use `/* */`. A `*` comment in SAS runs until the next semicolon, and a `*` line with no semicolon swallows the next statement. The three-decimal step follows R's halfway rule (keep the even thousandth). Gaines County raw hearing-loss cases are the halfway value 3.3405, which this table prints as 3.340.
+
+This program was run in SAS OnDemand for Academics on Nov 11, 2026: 0 errors, 0 warnings, output identical to R. The log block is `sas_output/sas_output.txt`. The full log is `sas_output/hpsa_capture_log.html`. Each saved log line has the blank SAS writes in column 1; the characters after that blank match `r_reference/r_output.txt`.
 
 ### Stata
 
@@ -71,36 +77,34 @@ cd "/path/to/sas-stata-port"
 do hpsa_capture.do
 ```
 
-The do-file writes `stata_output.log` with `log using`. Compare the block between `BEGIN_HPSA_CAPTURE_TABLE` and `END_HPSA_CAPTURE_TABLE` with `r_reference/r_output.txt`. Lines Stata echoes as commands are marked with a leading period; the table text under `type` is the block to compare.
-
-Stata was not available when this folder was prepared, so the do-file has not been executed here. The Stata column below stays `pending run`.
+The do-file writes `stata_output.log` with `log using`. Compare the block between `BEGIN_HPSA_CAPTURE_TABLE` and `END_HPSA_CAPTURE_TABLE` with `r_reference/r_output.txt`. Lines Stata echoes as commands are marked with a leading period; the table text under `type` is the block to compare. A `*` at the start of a line is a one-line comment in Stata. It ends at the newline, and every `*` comment in `hpsa_capture.do` starts in column 1. The file has no `/*` block comment.
 
 ## Results
 
-R values are the three-decimal figures in `r_reference/r_output.txt`. They match the rounded columns printed by `track3_hpsa_capture.R`. SAS will be run in SAS OnDemand and filled in later. Stata was not run.
+R values are the three-decimal figures in `r_reference/r_output.txt`. They match the rounded columns printed by `track3_hpsa_capture.R`. SAS was run in SAS OnDemand for Academics on Nov 11, 2026: 0 errors, 0 warnings, output identical to R. The Stata column is not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt.
 
 | County | State | Cases | HPSA score | R capture probability | R expected hearing-loss cases | R captured cases | SAS | Stata |
 |---|---|---:|---:|---:|---:|---:|---|---|
-| GAINES | TX | 393 | 20 | 0.010 | 3.340 | 0.033 | pending run | pending run |
-| TERRY | TX | 89 | 17 | 0.015 | 0.757 | 0.012 | pending run | pending run |
-| YOAKUM | TX | 72 | 16 | 0.018 | 0.612 | 0.011 | pending run | pending run |
-| LYNN | TX | 48 | 18 | 0.013 | 0.408 | 0.005 | pending run | pending run |
-| LEA | NM | 42 | 14 | 0.024 | 0.357 | 0.008 | pending run | pending run |
-| GARZA | TX | 35 | 17 | 0.015 | 0.298 | 0.005 | pending run | pending run |
-| DAWSON | TX | 27 | 15 | 0.020 | 0.230 | 0.005 | pending run | pending run |
-| LUBBOCK | TX | 24 | 5 | 0.087 | 0.204 | 0.018 | pending run | pending run |
-| HOCKLEY | TX | 18 | 16 | 0.018 | 0.153 | 0.003 | pending run | pending run |
-| COCHRAN | TX | 14 | 19 | 0.011 | 0.119 | 0.001 | pending run | pending run |
-| OKLAHOMA | OK | 14 | 8 | 0.056 | 0.119 | 0.007 | pending run | pending run |
-| CROSBY | TX | 10 | 16 | 0.018 | 0.085 | 0.002 | pending run | pending run |
-| TULSA | OK | 10 | 6 | 0.075 | 0.085 | 0.006 | pending run | pending run |
-| CHAVES | NM | 9 | 13 | 0.027 | 0.077 | 0.002 | pending run | pending run |
-| FLOYD | TX | 8 | 17 | 0.015 | 0.068 | 0.001 | pending run | pending run |
-| EDDY | NM | 8 | 12 | 0.032 | 0.068 | 0.002 | pending run | pending run |
-| CANADIAN | OK | 7 | 10 | 0.042 | 0.060 | 0.003 | pending run | pending run |
-| ROOSEVELT | NM | 6 | 16 | 0.018 | 0.051 | 0.001 | pending run | pending run |
-| COMANCHE | OK | 6 | 12 | 0.032 | 0.051 | 0.002 | pending run | pending run |
-| MOTLEY | TX | 5 | 20 | 0.010 | 0.043 | 0.000 | pending run | pending run |
+| GAINES | TX | 393 | 20 | 0.010 | 3.340 | 0.033 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| TERRY | TX | 89 | 17 | 0.015 | 0.757 | 0.012 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| YOAKUM | TX | 72 | 16 | 0.018 | 0.612 | 0.011 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| LYNN | TX | 48 | 18 | 0.013 | 0.408 | 0.005 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| LEA | NM | 42 | 14 | 0.024 | 0.357 | 0.008 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| GARZA | TX | 35 | 17 | 0.015 | 0.298 | 0.005 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| DAWSON | TX | 27 | 15 | 0.020 | 0.230 | 0.005 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| LUBBOCK | TX | 24 | 5 | 0.087 | 0.204 | 0.018 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| HOCKLEY | TX | 18 | 16 | 0.018 | 0.153 | 0.003 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| COCHRAN | TX | 14 | 19 | 0.011 | 0.119 | 0.001 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| OKLAHOMA | OK | 14 | 8 | 0.056 | 0.119 | 0.007 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| CROSBY | TX | 10 | 16 | 0.018 | 0.085 | 0.002 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| TULSA | OK | 10 | 6 | 0.075 | 0.085 | 0.006 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| CHAVES | NM | 9 | 13 | 0.027 | 0.077 | 0.002 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| FLOYD | TX | 8 | 17 | 0.015 | 0.068 | 0.001 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| EDDY | NM | 8 | 12 | 0.032 | 0.068 | 0.002 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| CANADIAN | OK | 7 | 10 | 0.042 | 0.060 | 0.003 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| ROOSEVELT | NM | 6 | 16 | 0.018 | 0.051 | 0.001 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| COMANCHE | OK | 6 | 12 | 0.032 | 0.051 | 0.002 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
+| MOTLEY | TX | 5 | 20 | 0.010 | 0.043 | 0.000 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
 
 Motley County's captured-case value prints as 0.000 after rounding to three decimals.
 

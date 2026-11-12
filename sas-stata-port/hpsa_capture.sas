@@ -14,12 +14,11 @@
   r_reference/r_output.txt.
 ******************************************************************************/
 
-* Folder that contains outbreak_counties.csv.
-* %sysget(HOME) is the home directory in SAS OnDemand for Academics.
-* Upload outbreak_counties.csv to that folder, or point datadir at the
-* data folder. Example:
-*   %let datadir = /home/your-user-id/sas-stata-port/data;
-* No trailing slash.
+/* Folder that contains outbreak_counties.csv.
+   SYSGET(HOME) returns the home directory in SAS OnDemand for Academics.
+   Upload outbreak_counties.csv to that folder, or point datadir at the
+   data folder, for example /home/your-user-id/sas-stata-port/data.
+   No trailing slash. */
 %let datadir = %sysget(HOME);
 
 options linesize=256;
@@ -32,7 +31,7 @@ data outbreak;
   infile "&datadir/outbreak_counties.csv" dsd truncover firstobs=2 lrecl=200;
   length state_abbr $2 county_clean $20;
   input state_abbr :$2. county_clean :$20. cases hpsa_score;
-  * Row number keeps tied case counts in the original file order.
+  /* Row number keeps tied case counts in the original file order. */
   seq = _n_;
 run;
 
@@ -88,7 +87,7 @@ proc sort data=rounded;
   by descending cases seq;
 run;
 
-* Stop if the extract is not the 20-county table.
+/* Stop if the extract is not the 20-county table. */
 data _null_;
   if 0 then set rounded nobs=nobs;
   if nobs ne 20 then do;
