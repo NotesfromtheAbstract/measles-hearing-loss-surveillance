@@ -1,5 +1,5 @@
 # ============================================================
-# NOTES FROM THE ABSTRACT
+# NOTES FROM THE ABSTRACTS
 # Track 1: Historical Measles Burden & Projected Hearing Loss
 # Sources:
 #   - CDC historical case series (Our World in Data / CDC MMWR)

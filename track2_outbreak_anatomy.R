@@ -1,5 +1,5 @@
 # ============================================================
-# NOTES FROM THE ABSTRACT
+# NOTES FROM THE ABSTRACTS
 # Track 2: 2025 Outbreak Anatomy & The Double Invisibility Problem
 #
 # Sources:

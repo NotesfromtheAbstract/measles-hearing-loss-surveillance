@@ -1,6 +1,6 @@
 # Measles-Associated Hearing Loss and Surveillance Failure
 
-**Companion code for ["The Burden That Was Never Counted"](https://andrewrcrocker.substack.com/p/the-burden-that-was-never-counted) — *Notes from the Abstract***
+**Companion code for ["The Burden That Was Never Counted"](https://andrewrcrocker.substack.com/p/the-burden-that-was-never-counted) — *Notes from the Abstracts***
 
 This repository contains the R code and data sources behind a three-track analysis of how measles-associated hearing loss disappears from surveillance data. The analysis demonstrates that the gap is structural, produced by encounter-based coding workflows that systematically disconnect downstream complications from their original infectious cause, and that the gap widens dramatically in communities with the fewest healthcare resources.
 
@@ -131,4 +131,4 @@ This work is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/
 
 ## Author
 
-Andrew — [Notes from the Abstract](https://notesfromtheabstract.substack.com/)
+Andrew — [Notes from the Abstracts](https://notesfromtheabstract.substack.com/)

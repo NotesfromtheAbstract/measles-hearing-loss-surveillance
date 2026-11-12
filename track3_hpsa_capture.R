@@ -1,5 +1,5 @@
 # ============================================================
-# NOTES FROM THE ABSTRACT
+# NOTES FROM THE ABSTRACTS
 # Track 3: Shortage Areas, Outbreak Risk, and the Geography
 #           of Surveillance Failure
 #
