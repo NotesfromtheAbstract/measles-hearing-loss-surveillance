@@ -107,3 +107,5 @@ R values are the three-decimal figures in `r_reference/r_output.txt`. They match
 | MOTLEY | TX | 5 | 20 | 0.010 | 0.043 | 0.000 | matches R | not run: Stata not available to the author of the port; run hpsa_capture.do and compare stata_output.log with r_reference/r_output.txt |
 
 Motley County's captured-case value prints as 0.000 after rounding to three decimals.
+
+Author of the original R analysis: Andrew Crocker.
